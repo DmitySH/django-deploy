@@ -1,0 +1,4 @@
+Django
+django-tinymce==3.3.0
+python-dotenv==0.17.0
+pytils
