@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body style="margin: 0; font-family: 'Gilroy', sans-serif;">
+    <div class="container" style="margin: 20px 60px 20px 60px">
+        <header style="text-align: justify">
+            <div style="display: inline-block">
+                <h1>Новости сейчас</h1>
+            </div>
+            {% if perms.app_news.add_news%}
+                <div style="display: inline-block">
+                <a href="{% url 'create' %}"><button><h3>Добавить новость</h3></button></a>
+            </div>
+            {% endif %}
+            <div style="display: inline-block; float: right; text-align: center">
+                {% if request.user.is_authenticated %}
+                    <h4>Привет, {{ request.user.username }}</h4>
+                    <a href="user/{{ request.user.profile.slug }}/"><button>Аккаунт</button></a>
+                    <a href="{% url 'logout'%}"><button>Выйти</button></a>
+                {% else %}
+                    <h4>Кажется, ты еще не залогинился</h4>
+                    <a href="{% url 'register'%}"><button>Регистрация</button></a>
+                    <a href="{% url 'login'%}"><button>Войти</button></a>
+                {% endif %}
+            </div>
+        </header>
+        <hr/>
+        <div class="news-list">
+            {% if not news_list %}
+                <h3>Новостей нет</h3>
+            {% else %}
+                <ol>
+                    {% for news in news_list %}
+                        <li>
+                            <a href="{% url 'news-detail' news.id %}">{{ news }}</a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

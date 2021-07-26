@@ -1,2 +1,2 @@
-# django-deploy
-Pythonanywhere deployment
+# news-django
+Project for SkillBox on django
